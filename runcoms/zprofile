@@ -45,6 +45,8 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   $path
+  $HOME/.rbenv/bin:$PATH
+  $HOME/Documents/projects/bin
 )
 
 #
@@ -72,3 +74,14 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+#
+# Philipp's custom stuff
+#
+
+eval "$(rbenv init -)"
+
+export GIT_EDITOR="mate --name 'Git Commit Message' -w -l 1"
+
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
