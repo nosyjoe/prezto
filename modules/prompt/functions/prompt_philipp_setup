@@ -2,7 +2,7 @@
 # A simple theme that displays relevant, contextual information.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   nosyjoe Ionescu <nosyjoe.ionescu@gmail.com>
 #   Philipp Engel <philipp@filzip.com>
 #
 # Screenshots:
@@ -33,84 +33,99 @@
 # Load dependencies.
 pmodload 'helper'
 
-function prompt_sorin_pwd {
+function prompt_nosyjoe_pwd {
   local pwd="${PWD/#$HOME/~}"
 
   if [[ "$pwd" == (#m)[/~] ]]; then
-    _prompt_sorin_pwd="$MATCH"
+    _prompt_nosyjoe_pwd="$MATCH"
     unset MATCH
   else
-    _prompt_sorin_pwd="%F{0}${pwd:h}/%F{4}${${pwd:t}//\%/%%}%F{0}"
+    _prompt_nosyjoe_pwd="%F{7}${pwd:h}/%F{15}${${pwd:t}//\%/%%}%F{7}"
   fi
 }
 
-function prompt_sorin_git_info {
-  if (( _prompt_sorin_precmd_async_pid > 0 )); then
+function prompt_nosyjoe_git_info {
+  if (( _prompt_nosyjoe_precmd_async_pid > 0 )); then
     # Append Git status.
-    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
+    if [[ -s "$_prompt_nosyjoe_precmd_async_data" ]]; then
       alias typeset='typeset -g'
-      source "$_prompt_sorin_precmd_async_data"
+      source "$_prompt_nosyjoe_precmd_async_data"
       RPROMPT+='${git_info:+${(e)git_info[status]}}'
       unalias typeset
     fi
 
     # Reset PID.
-    _prompt_sorin_precmd_async_pid=0
+    _prompt_nosyjoe_precmd_async_pid=0
 
     # Redisplay prompt.
     zle && zle reset-prompt
   fi
 }
 
-function prompt_sorin_precmd_async {
+function prompt_nosyjoe_precmd_async {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
-    # typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
+    # typeset -p git_info >! "$_prompt_nosyjoe_precmd_async_data"
   fi
 
   # Signal completion to parent process.
   kill -WINCH $$
 }
 
-function prompt_sorin_precmd {
+function prompt_nosyjoe_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
+	RETVAL=$?
 
   # Format PWD.
-  prompt_sorin_pwd
+  prompt_nosyjoe_pwd
   
   if (( $+functions[git-info] )); then
     git-info
-    # typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
+    # typeset -p git_info >! "$_prompt_nosyjoe_precmd_async_data"
   fi
 
   # Define prompts.
   RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
 
   # Kill the old process of slow commands if it is still running.
-  # if (( _prompt_sorin_precmd_async_pid > 0 )); then
-    # kill -KILL "$_prompt_sorin_precmd_async_pid" &>/dev/null
+  # if (( _prompt_nosyjoe_precmd_async_pid > 0 )); then
+    # kill -KILL "$_prompt_nosyjoe_precmd_async_pid" &>/dev/null
   # fi
 
   # Compute slow commands in the background.
-  # trap prompt_sorin_git_info WINCH
-  # prompt_sorin_precmd_async &!
-  # _prompt_sorin_precmd_async_pid=$!
+  # trap prompt_nosyjoe_git_info WINCH
+  # prompt_nosyjoe_precmd_async &!
+  # _prompt_nosyjoe_precmd_async_pid=$!
 }
 
-function prompt_sorin_setup {
+# Status:
+# - was there an error
+# - am I root
+# - are there background jobs?
+# prompt_status() {
+#   local symbols
+#   symbols=()
+#   [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}$CROSS"
+#   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}$LIGHTNING"
+#   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}$GEAR"
+#
+#   [[ -n "$symbols" ]] && prompt_segment $PRIMARY_FG default " $symbols "
+# }
+
+function prompt_nosyjoe_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
-  _prompt_sorin_precmd_async_pid=0
-  _prompt_sorin_precmd_async_data="${TMPPREFIX}-prompt_sorin_data"
+  _prompt_nosyjoe_precmd_async_pid=0
+  _prompt_nosyjoe_precmd_async_data="${TMPPREFIX}-prompt_nosyjoe_data"
 
   # Load required functions.
   autoload -Uz add-zsh-hook
 
   # Add hook for calling git-info before each command.
-  add-zsh-hook precmd prompt_sorin_precmd
+  add-zsh-hook precmd prompt_nosyjoe_precmd
 
   # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{7}...%f%b'
@@ -128,18 +143,18 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:keys' format 'prompt' '(%b%d%a%m%u)'
 
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}%n%f%F{8}@%m%f ${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.) ${git_info:+${(e)git_info[prompt]}}${editor_info[keymap]} '
+  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}%n%f%F{8}@%m%f ${_prompt_nosyjoe_pwd}%(!. %B%F{1}#%f%b.) ${git_info:+${(e)git_info[prompt]}}${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
-function prompt_sorin_preview {
+function prompt_nosyjoe_preview {
   local +h PROMPT=''
   local +h RPROMPT=''
   local +h SPROMPT=''
 
   editor-info 2>/dev/null
-  prompt_preview_theme 'sorin'
+  prompt_preview_theme 'philipp'
 }
 
-prompt_sorin_setup "$@"
+prompt_nosyjoe_setup "$@"
