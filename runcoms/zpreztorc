@@ -39,7 +39,8 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'fasd'  
+  'fasd' \
+  'iterm'
 
 #
 # Editor
@@ -164,5 +165,3 @@ zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Integrate with iTerm2.
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
-
-source ~/alias.zsh
