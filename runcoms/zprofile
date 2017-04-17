@@ -79,9 +79,11 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # Philipp's custom stuff
 #
 
-eval "$(rbenv init -)"
-
 export GIT_EDITOR="mate --name 'Git Commit Message' -w -l 1"
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_HOME=/usr/local/share/android-sdk
 
+
+if [[ -e ~/alias.zsh ]]; then
+  source ~/.alias.zsh
+fi
