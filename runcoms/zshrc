@@ -12,5 +12,3 @@ fi
 
 # Customize to your needs...
 
-# enable rbenv
-eval "$(rbenv init -)"
