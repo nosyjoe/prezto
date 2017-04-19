@@ -39,14 +39,8 @@ zstyle ':prezto:load' pmodule \
   'homebrew' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'fasd'  
-
-#
-# Autosuggestions
-#
-
-# Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''
+  'fasd' \
+  'iterm'
 
 #
 # Editor
@@ -101,7 +95,7 @@ zstyle ':prezto:module:git:log:oneline' format '%Cred%h%Creset - %Cgreen(%cD)%Cr
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'philipp'
+zstyle ':prezto:module:prompt' theme 'nosyjoe'
 
 #
 # Ruby
@@ -137,7 +131,6 @@ zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 #   'main' \
 #   'brackets' \
 #   'pattern' \
-#   'line' \
 #   'cursor' \
 #   'root'
 #

@@ -69,8 +69,7 @@ fi
 #
 
 if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$LOGNAME"
-  mkdir -p -m 700 "$TMPDIR"
+  export TMPDIR="$(mktemp -d)"
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
@@ -79,12 +78,11 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # Philipp's custom stuff
 #
 
-if type "rbenv" >> /dev/null; then
-  eval "$(rbenv init -)"
-fi
-
-
 export GIT_EDITOR="mate --name 'Git Commit Message' -w -l 1"
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_HOME=/usr/local/share/android-sdk
 
+
+if [[ -e ~/alias.zsh ]]; then
+  source ~/.alias.zsh
+fi
