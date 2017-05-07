@@ -165,3 +165,8 @@ zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Integrate with iTerm2.
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+
+source ~/.aliases
+
+# source aws completion
+source /usr/local/share/zsh/site-functions/_aws
