@@ -97,6 +97,9 @@ zstyle ':prezto:module:git:log:oneline' format '%Cred%h%Creset - %Cgreen(%cD)%Cr
 # Auto set to 'off' on dumb terminals.
 zstyle ':prezto:module:prompt' theme 'nosyjoe'
 
+# Set how themes that use promptpwd function display the pwd, can be 'short', 'long', or 'full'
+# zstyle ':prezto:module:prompt' pwd-length 'short'
+
 #
 # Ruby
 #
@@ -166,7 +169,10 @@ zstyle ':prezto:module:tmux:auto-start' local 'yes'
 # Integrate with iTerm2.
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
+# Set the default session name:
+# zstyle ':prezto:module:tmux:session' name 'YOUR DEFAULT SESSION NAME'
+
 source ~/.aliases
 
 # source aws completion
-source /usr/local/share/zsh/site-functions/_aws
+# source /usr/local/share/zsh/site-functions/_aws
