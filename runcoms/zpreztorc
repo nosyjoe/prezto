@@ -43,7 +43,8 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'history-substring-search' \
   'fasd' \
-  'ruby' 
+  'ruby' \
+  'autosuggestions'
 
 #
 # Completions
@@ -97,7 +98,7 @@ zstyle ':prezto:module:git:log:oneline' format '%Cred%h%Creset - %Cgreen(%cD)%Cr
 #
 
 # Set the keyword used by `mand` to open man pages in Dash.app
-# zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
+zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
 
 #
 # Pacman
